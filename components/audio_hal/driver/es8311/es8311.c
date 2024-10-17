@@ -234,6 +234,7 @@ static int i2c_init()
         .master.clk_speed = 100000,
     };
     res = get_i2c_pins(I2C_NUM_0, &es_i2c_cfg);
+    printf("i2c pins: %d %d\n",es_i2c_cfg.sda_io_num , es_i2c_cfg.scl_io_num);
     ES_ASSERT(res, "getting i2c pins error", -1);
     i2c_handle = i2c_bus_create(I2C_NUM_0, &es_i2c_cfg);
     return res;

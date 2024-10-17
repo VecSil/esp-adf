@@ -37,8 +37,10 @@ esp_err_t get_i2c_pins(i2c_port_t port, i2c_config_t *i2c_config)
 {
     AUDIO_NULL_CHECK(TAG, i2c_config, return ESP_FAIL);
     if (port == I2C_NUM_0 || port == I2C_NUM_1) {
-        i2c_config->sda_io_num = GPIO_NUM_18;
-        i2c_config->scl_io_num = GPIO_NUM_23;
+        // i2c_config->sda_io_num = GPIO_NUM_18;
+        // i2c_config->scl_io_num = GPIO_NUM_23;
+        i2c_config->sda_io_num = GPIO_NUM_32;
+        i2c_config->scl_io_num = GPIO_NUM_33;
     } else {
         i2c_config->sda_io_num = -1;
         i2c_config->scl_io_num = -1;
@@ -51,19 +53,12 @@ esp_err_t get_i2c_pins(i2c_port_t port, i2c_config_t *i2c_config)
 esp_err_t get_i2s_pins(int port, board_i2s_pin_t *i2s_config)
 {
     AUDIO_NULL_CHECK(TAG, i2s_config, return ESP_FAIL);
-    if (port == 0) {  //此时port1其他引脚都是默认高电平
-        i2s_config->mck_io_num = -1;            //尝试输出:高电平无波动
-        // i2s_config->mck_io_num = GPIO_NUM_0;    //当打开这个选项后,也是有波形的,-1.4--4.6  6V波动 周期250ns左右
-        i2s_config->bck_io_num = GPIO_NUM_5;    //尝试输出:-1.4--4.6  6V波动  周期2us  8倍mclk
-        i2s_config->ws_io_num = GPIO_NUM_25;    //尝试输出:-1.4--4.6  6V波动  周期64us 256倍mclk
-        i2s_config->data_out_num = GPIO_NUM_26; //尝试输出:低电平无波动
-        i2s_config->data_in_num = GPIO_NUM_35; 
-    } else if (port == 1) {
-        i2s_config->mck_io_num = GPIO_NUM_0;    //-正常通讯时-1.4--4.6  6V波动  周期250ns左右
-        i2s_config->bck_io_num = GPIO_NUM_32;   //-正常通讯时-1.4--4.6  6V波动  周期2us  8倍mclk
-        i2s_config->ws_io_num = GPIO_NUM_33;    //-正常通讯时-0.4--3.6  4V波动  周期64us 256倍mclk
-        i2s_config->data_out_num = -1;
-        i2s_config->data_in_num = GPIO_NUM_36;  //-正常通讯时-0.4--3.6  4V波动  一个波形周期64us左右 单个波峰4us  正好是16000采样率
+    if (port == 0 || port == 1) {
+        i2s_config->mck_io_num = -1; 
+        i2s_config->bck_io_num = GPIO_NUM_12;   //2us period
+        i2s_config->ws_io_num = GPIO_NUM_13;    //64us period
+        i2s_config->data_out_num = GPIO_NUM_14; 
+        i2s_config->data_in_num = GPIO_NUM_15;  //64us period (16000 sample rates)
     } else {
         memset(i2s_config, -1, sizeof(board_i2s_pin_t));
         ESP_LOGE(TAG, "i2s port %d is not supported", port);

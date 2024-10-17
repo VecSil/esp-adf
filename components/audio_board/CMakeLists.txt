@@ -143,4 +143,13 @@ set(COMPONENT_SRCS
 )
 endif()
 
+if (CONFIG_STARTBLOCK_AUDIO)
+message(STATUS "Current board name is " CONFIG_STARTBLOCK_AUDIO)
+list(APPEND COMPONENT_ADD_INCLUDEDIRS ./startblock_audio)
+set(COMPONENT_SRCS
+./startblock_audio/board.c
+./startblock_audio/board_pins_config.c
+)
+endif()
+
 register_component()

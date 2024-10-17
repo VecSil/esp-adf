@@ -76,7 +76,7 @@ static esp_err_t _lcd_init(esp_periph_handle_t self)
     ESP_ERROR_CHECK(esp_lcd_panel_set_gap(periph_lcd->lcd_panel_handle, 0, 0));
     ESP_ERROR_CHECK(esp_lcd_panel_swap_xy(periph_lcd->lcd_panel_handle, periph_lcd->lcd_swap_xy));
     ESP_ERROR_CHECK(esp_lcd_panel_mirror(periph_lcd->lcd_panel_handle, periph_lcd->lcd_mirror_x, periph_lcd->lcd_mirror_y));
-    ESP_ERROR_CHECK(esp_lcd_panel_disp_on_off(periph_lcd->lcd_panel_handle, true));
+    // ESP_ERROR_CHECK(esp_lcd_panel_disp_on_off(periph_lcd->lcd_panel_handle, true));
     return ESP_OK;
 }
 

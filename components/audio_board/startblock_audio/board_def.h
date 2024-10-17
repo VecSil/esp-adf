@@ -25,43 +25,23 @@
 #ifndef _AUDIO_BOARD_DEFINITION_H_
 #define _AUDIO_BOARD_DEFINITION_H_
 
-/**
- * @brief SDCARD Function Definition
- */
-#define FUNC_SDCARD_EN            (1)
-#define SDCARD_OPEN_FILE_NUM_MAX  5
-#define SDCARD_INTR_GPIO          GPIO_NUM_34
-#define SDCARD_PWR_CTRL           GPIO_NUM_13
-
-#define ESP_SD_PIN_CLK            GPIO_NUM_14
-#define ESP_SD_PIN_CMD            GPIO_NUM_15
-#define ESP_SD_PIN_D0             GPIO_NUM_2
-#define ESP_SD_PIN_D3             -1
-
-
-/**
- * @brief LED Function Definition
- */
-#define FUNC_SYS_LEN_EN           (1)
-#define BLUE_LED_GPIO             GPIO_NUM_27
-#define GREEN_LED_GPIO            GPIO_NUM_22
-
 
 /**
  * @brief Audio Codec Chip Function Definition
  */
-#define FUNC_AUDIO_CODEC_EN       (1)
-#define ES7243_MCLK_GPIO          GPIO_NUM_0
-#define HEADPHONE_DETECT          GPIO_NUM_19
-#define PA_ENABLE_GPIO            GPIO_NUM_21
-#define ES8311_MCLK_SOURCE        1   /* 0 From MCLK of esp32   1 From BCLK */
+#define FUNC_AUDIO_CODEC_EN         (1)
+#define ES7243_MCLK_GPIO            -1
+#define HEADPHONE_DETECT            -1
+#define PA_ENABLE_GPIO              GPIO_NUM_21
+#define ES8311_MCLK_SOURCE          1   /* 0 From MCLK of esp32   1 From BCLK */
 
-#define CODEC_ADC_I2S_PORT        (0)
+#define CODEC_ADC_I2S_PORT          (0)
+#define AUDIO_SAMPLE_RATE           (16000)
+#define AUDIO_BITS                  (16)
+#define AUDIO_CHANNELS              (1)
 
-#define CODEC_ADC_BITS_PER_SAMPLE (16) /* 16bit */
-#define CODEC_ADC_SAMPLE_RATE     (16000)
-#define RECORD_HARDWARE_AEC       (true)
-#define BOARD_PA_GAIN             (10) /* Power amplifier gain defined by board (dB) */
+#define RECORD_HARDWARE_AEC         (true)
+#define BOARD_PA_GAIN               (5) /* Power amplifier gain defined by board (dB) 越大声音越小*/
 
 extern audio_hal_func_t AUDIO_CODEC_ES8311_DEFAULT_HANDLE;
 extern audio_hal_func_t AUDIO_CODEC_ES7243_DEFAULT_HANDLE;
@@ -78,17 +58,47 @@ extern audio_hal_func_t AUDIO_CODEC_ES7243_DEFAULT_HANDLE;
 };
 
 
+
+
+
+
+
+
+
+//BELOWS ARE ADAPTIONS FOR ESP-ADF FRAMEWARE
+
+/**
+ * @brief SDCARD Function Definition
+ */
+#define FUNC_SDCARD_EN            (1)
+#define SDCARD_OPEN_FILE_NUM_MAX  5
+#define SDCARD_INTR_GPIO          -1
+#define SDCARD_PWR_CTRL           -1
+
+#define ESP_SD_PIN_CLK            -1
+#define ESP_SD_PIN_CMD            -1
+#define ESP_SD_PIN_D0             -1
+#define ESP_SD_PIN_D3             -1
+
+
+/**
+ * @brief LED Function Definition
+ */
+#define FUNC_SYS_LEN_EN           (0)
+#define BLUE_LED_GPIO             -1
+#define GREEN_LED_GPIO            -1
+
 /**
  * @brief Button Function Definition
  */
 #define FUNC_BUTTON_EN            (1)
 #define ADC_DETECT_GPIO           GPIO_NUM_39
-#define INPUT_KEY_NUM             6
-#define BUTTON_VOLUP_ID           0
-#define BUTTON_VOLDOWN_ID         1
-#define BUTTON_SET_ID             2
-#define BUTTON_PLAY_ID            3
-#define BUTTON_MODE_ID            4
+#define INPUT_KEY_NUM             1
+#define BUTTON_VOLUP_ID           -1
+#define BUTTON_VOLDOWN_ID         -1
+#define BUTTON_SET_ID             -1
+#define BUTTON_PLAY_ID            -1
+#define BUTTON_MODE_ID            -1
 #define BUTTON_REC_ID             5
 #define INPUT_KEY_DEFAULT_INFO() {                      \
      {                                                  \
